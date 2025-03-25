@@ -2,7 +2,7 @@ import { api } from "@/pages/api";
 
 interface EndpointBase {
     url: string;
-    method: 'get' | 'post' | 'put' | 'delete' | 'patch';
+    method: 'get' | 'post' | 'put' | 'delete';
     authenticated: boolean;
 }
 

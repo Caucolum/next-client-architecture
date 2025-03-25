@@ -13,7 +13,7 @@ const useServiceCall = ({ fn }: any) => {
         data,
     } = useMutation(async (...args: any) => {
         const response = await fn(...args);
-        return response;
+        return { response, args };
     });
 
     const makeRequest = (props: any) => {
@@ -22,7 +22,7 @@ const useServiceCall = ({ fn }: any) => {
 
     return {
         makeRequest,
-        data: data,
+        data: data?.response,
         args: data?.args,
         isLoading,
         isSuccess, 
