@@ -1,20 +1,18 @@
-interface BreedsImageRandomArgProps {
+import { api } from "@/pages/api";
 
+interface EndpointBase {
+    url: string;
+    method: 'get' | 'post' | 'put' | 'delete' | 'patch';
+    authenticated: boolean;
 }
 
-interface BreedsImageRandomDataProps {
-    message: string,
-    status: string,
-}
+type Endpoint<ArgsProps = unknown, DataProps = unknown> = EndpointBase & {
+    ARGS_PROPS?: ArgsProps;
+    DATA_PROPS?: DataProps;
+};
 
-export const endpoints = {
-    breeds_image_random: { 
-        url: '/breeds/image/random', 
-        method: 'get', 
-        authenticated: false, 
-        ARGS_PROPS: {} as BreedsImageRandomArgProps,  
-        DATA_PROPS: {} as BreedsImageRandomDataProps,
-    },
-    breeds_list_all: { url: '/breeds/list/all', method: 'get', authenticated: false, },
-    breed_hound_images: { url: '/breed/hound/images', method: 'get', authenticated: false, },
-} as const;
+export type Endpoints = {
+    [key: string]: Endpoint;
+};
+
+export const endpoints: Endpoints = api;
