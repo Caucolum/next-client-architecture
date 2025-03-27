@@ -24,6 +24,8 @@ With Next-client-architecture, the user can list their endpoints, automatically 
 The API object is automatically created when implementing the library:
 
 ```ts
+export const BASE_URL = "";
+
 export const api = {} as const satisfies Record<string, ApiEndpoint>;
 ```
 Now just include your own API:
@@ -43,6 +45,8 @@ interface BreedsHoudImagesDataProps {
     status: string;
 }
 
+export const BASE_URL = "https://dog.ceo/api";
+
 export const api = {
     breeds_image_random: {
         url: '/breeds/image/random',
@@ -58,6 +62,28 @@ export const api = {
         DATA_PROPS: {} as BreedsHoudImagesDataProps,
     },
 } as const satisfies Record<string, ApiEndpoint>;
+```
+
+or
+
+```ts
+    export const BASE_URL = "";
+    
+    export const api = {
+        breeds_image_random: { 
+            url: 'https://dog.ceo/api/breeds/image/random', 
+            method: 'get', 
+            authenticated: false, 
+            ARGS_PROPS: {} as BreedsImageRandomArgProps,  
+            DATA_PROPS: {} as BreedsImageRandomDataProps,
+        },
+        breed_hound_images: { 
+            url: 'https://dog.ceo/api/breed/hound/images', 
+            method: 'get', 
+            authenticated: false, 
+            DATA_PROPS: {} as BreedsHoudImagesDataProps,
+        },
+    } as const satisfies Record<string, ApiEndpoint>;
 ```
 
 ### 2. Server-Side Usage (`getServerSideProps`)
